@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FireAdmin.Models.Station>
+
+@{
+  ViewBag.Title = "Grid";
+  var grid = new WebGrid(
+      Model,
+      rowsPerPage: 15,
+      canPage: true,
+      canSort: true
+      );
+}
+
+<h2>Stations</h2>
+
+<style type="text/css">
+    .table {
+        margin: 4px;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .header {
+        background-color: gray;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+</style>
+
+<div>
+    <asp:Label ID="lblMessage" runat="server" EnableViewState="false" ForeColor="Red">@ViewBag.Error</asp:Label>
+</div>
+
+<div>
+    @Html.ActionLink("Add New Station", "Create")
+</div>
+
+<div>
+    @grid.GetHtml(
+                                tableStyle: "table", // applying style on grid
+                                fillEmptyRows: false,
+                                //show empty row when there is only one record on page to it will display all empty rows there.
+                                headerStyle: "header", //applying style.
+                                footerStyle: "grid-footer", //applying style.
+                                mode: WebGridPagerModes.All, //paging to grid
+                                firstText: "<< First",
+                                previousText: "< Prev",
+                                nextText: "Next >",
+                                lastText: "Last >>",
+                                columns: grid.Columns(Html.StationGridColumns(grid))
+                                )
+</div>
+    <div>
+        <asp:Label ID="lblMessage" runat="server" EnableViewState="false" ForeColor="Red">@ViewBag.Error</asp:Label> 
+    </div>

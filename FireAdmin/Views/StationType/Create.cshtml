@@ -1,0 +1,56 @@
+﻿@model FireAdmin.Models.StationType
+
+@{
+    ViewBag.Title = "Create Station Type | FireAdmin";
+}
+
+@section Scripts {
+
+}
+
+@section Breadcrumb {
+    <li>
+        @Html.ActionLink("Station Types", "Index")
+    </li>
+    <li class="current">
+        @Html.ActionLink("Create", "Create")
+    </li>
+}
+
+@using (Html.BeginForm("Create", "Create", FormMethod.Post, new { @class = "form-horizontal row-border" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row padding-top-15px">
+        <!--=== Horizontal Forms ===-->
+        
+        <div class="col-md-12">
+            @ViewBag.Error
+        </div>
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Create Station Type</h4>
+                </div>
+                @Html.ValidationSummary(true)
+                <div class="widget-content">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-11">
+                            @Html.TextBoxFor(model => model.Type, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Type)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11">
+                            <input type="submit" value="Create" class="btn btn-default" /> | @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <asp:Label ID="lblMessage" runat="server" EnableViewState="false" ForeColor="Red">@ViewBag.Error</asp:Label>
+        </div>
+    </div>
+}

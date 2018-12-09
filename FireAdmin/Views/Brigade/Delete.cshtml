@@ -1,0 +1,61 @@
+﻿@model FireAdmin.Models.Brigade
+
+@{
+    ViewBag.Title = "Delete Brigade";
+}
+
+@section Scripts {
+
+}
+
+@section SideMenu {
+    @Html.Partial("_SideMenuPartial", null, new ViewDataDictionary { { "main-menu", "SiteAdmin" }, { "sub-menu", "Brigades" } })
+}
+
+@section Breadcrumb {
+    <li>
+        @Html.ActionLink("Brigades", "Index")
+    </li>
+    <li class="current">
+        @Html.ActionLink("Delete", "Delete")
+    </li>
+}
+
+@using (Html.BeginForm("Delete", "Brigade", FormMethod.Post, new { @class = "form-horizontal row-border" }))
+{
+    <!--=== Anti-Forgery Token ===-->
+    @Html.AntiForgeryToken()
+    <!--=== Page Content ===-->
+    <div class="row padding-top-15px">
+        <!--=== Horizontal Forms ===-->
+        <div class="col-md-12">
+            <div class="widget box">
+                <div class="widget-header">
+                    <h4><i class="icon-reorder"></i> Delete Brigade</h4>
+                </div>
+                <div class="widget-content">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "text-right col-md-2" })
+                        <div class="col-md-10 padding-top-7px">
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" name="Delete" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Horizontal Forms -->
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("input[name='Delete']").click(function () {
+                return confirm('Are you sure you want to delete this Brigade?');
+            });
+        });
+    </script>
+}

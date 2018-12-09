@@ -1,0 +1,69 @@
+﻿@{
+    string mainMenu = ViewData["main-menu"].ToString();
+    string subMenu = ViewData["sub-menu"].ToString();
+    string mainMenuCss = "current open";
+    string subMenuCss = "current";
+}
+
+<!--=== Navigation ===-->
+<ul id="nav">
+    @if (User.IsInRole("OPCS"))
+    {
+        <li class="@if (mainMenu == "SiteAdmin") { Write(mainMenuCss); }">
+            <a href="javascript:void(0);">
+                <i class="icon-desktop"></i>
+                Site Admin
+            </a>
+            <ul class="sub-menu">
+                <li class="@if (subMenu == "Brigades") { Write(subMenuCss); }">
+                    <a href="\Brigade\Index\">
+                        <i class="icon-angle-right"></i>
+                        Brigades
+                    </a>
+                </li>
+                <li class="@if (subMenu == "StationTypes") { Write(subMenuCss); }">
+                    <a href="\StationType\Index\">
+                        <i class="icon-angle-right"></i>
+                        Station Types
+                    </a>
+                </li>
+                <li class="@if (subMenu == "Users") { Write(subMenuCss); }">
+                    <a href="\Account\Index\">
+                        <i class="icon-angle-right"></i>
+                        Users
+                    </a>
+                </li>
+                <li class="@if (subMenu == "Roles") { Write(subMenuCss); }">
+                    <a href="\Account\UserRoles\">
+                        <i class="icon-angle-right"></i>
+                        Roles
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+    @if (User.IsInRole("Admin"))
+            {
+        <li class="@if (mainMenu == "Admin") { Write(mainMenuCss); }">
+            <a href="javascript:void(0);">
+                <i class="icon-desktop"></i>
+                Admin
+            </a>
+            <ul class="sub-menu">
+                <li class="@if (subMenu == "Users") { Write(subMenuCss); }">
+                    <a href="\Account\">
+                        <i class="icon-angle-right"></i>
+                        Users
+                    </a>
+                </li>
+                <li class="@if (subMenu == "Stations") { Write(subMenuCss); }">
+                    <a href="\Station\Index\">
+                        <i class="icon-angle-right"></i>
+                        Stations
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+</ul>
+<!-- /Navigation -->
